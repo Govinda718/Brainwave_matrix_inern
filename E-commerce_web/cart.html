@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Shopping Cart</h1>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html">Back to Shop</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="cart">
+      <h2>Your Cart Items</h2>
+      <div id="cart-items"></div>
+      <div id="cart-summary">
+        <p>Total: ₹<span id="cart-total">0</span></p>
+        <button onclick="checkout()">Checkout</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 E-Shop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Load cart items from localStorage and display them
+    function loadCart() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartContainer = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      let total = 0;
+
+      if (cartItems.length === 0) {
+        cartContainer.innerHTML = '<p>Your cart is empty!</p>';
+      } else {
+        cartContainer.innerHTML = '';
+        cartItems.forEach(item => {
+          total += item.price;
+          const itemDiv = document.createElement('div');
+          itemDiv.innerHTML = `<p>${item.name} - ₹${item.price}</p>`;
+          cartContainer.appendChild(itemDiv);
+        });
+      }
+
+      cartTotal.textContent = total;
+    }
+
+    // Run loadCart on page load
+    document.addEventListener('DOMContentLoaded', loadCart);
+
+    function checkout() {
+      alert('Checkout functionality to be implemented!');
+    }
+  </script>
+</body>
+<script src="script.js"></script>
+</html>
